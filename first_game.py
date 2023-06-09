@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('My First Game by nashimiji')
 
 # background
-bg = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\background.png'
+bg = 'D:\\งานนานา\\โครงงานคอม\\Test\\First_Game\\photo\\background.png'
 background = pygame.image.load(bg).convert_alpha()
 background_rect = background.get_rect()
 
@@ -32,7 +32,7 @@ class Enemy(pygame.sprite.Sprite):
       # ฟังชั่นหลักที่มันจะรันทุกครั้งที่มีการเรียกใช้
       pygame.sprite.Sprite.__init__(self)
 
-      img = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\T1.png'
+      img = 'D:\\งานนานา\\โครงงานคอม\\Test\\First_Game\\photo\\T1.png'
       self.image = pygame.image.load(img).convert_alpha()
 
       # self.image = pygame.Surface((50,50))
@@ -66,7 +66,7 @@ class Player(pygame.sprite.Sprite):
       #ฟังชั่นหลักที่มันจะรันทุกครั้งที่มีการเรียกใช้
       pygame.sprite.Sprite.__init__(self)
 
-      img = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\2.png'
+      img = 'D:\\งานนานา\\โครงงานคอม\\Test\\First_Game\\photo\\2.png'
       self.image = pygame.image.load(img).convert_alpha()
 
       #self.image = pygame.Surface((50,50))
