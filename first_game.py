@@ -195,7 +195,7 @@ class Medicpack(pygame.sprite.Sprite):
 font_name = pygame.font.match_font('arial')
 def draw_text(screen,text,size,x,y):
     font = pygame.font.Font(font_name,size)
-    text_surface = font.render(text,True,YELLOW)
+    text_surface = font.render(text,True,BLUE)
     text_rect = text_surface.get_rect()
     text_rect.topleft = (x,y)
     screen.blit(text_surface,text_rect)
