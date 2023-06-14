@@ -242,16 +242,21 @@ while running:
     all_sprites.update()
 
     # ตรวจสอบการชนกัน Sprite ด้วยฟังชั่น collide
-    collide = pygame.sprite.spritecollide(player,group_enemy,False)
-    #print(collide)
+    collide = pygame.sprite.spritecollide(player,group_enemy,True)
+    print(collide)
 
     #if collide:
     #    LIVES -= 1
     #    print(LIVES)
 
     if collide:
+
+        enemy = Enemy()
+        all_sprites.add(enemy)
+        group_enemy.add(enemy)
+
         now_lives = pygame.time.get_ticks()
-        if now_lives - LIVES_TIME >= 3000:
+        if now_lives - LIVES_TIME >= 2000:
             LIVES -= 1
             LIVES_TIME = now_lives
 
