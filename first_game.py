@@ -17,6 +17,9 @@ SCORE = 0
 # ชีวิต
 LIVES = 3 
 GAMEOVER = False
+GAMEOVER_FONT = True
+GAMEOVER_TIME = pygame.time.get_ticks()
+
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('My First Game by nashimiji')
@@ -271,8 +274,19 @@ while running:
     
     # update score
     draw_text(screen,'SCORE:{}'.format(SCORE),30,WIDTH-300,10)
-    draw_text(screen,'Lives:{}'.format(LIVES),20,100,10)  
-    draw_text(screen,'GAME OVER',100,200,300)  
+    draw_text(screen,'Lives:{}'.format(LIVES),20,100,10) 
+    if GAMEOVER == True:
+        now_gameover = pygame.time.get_ticks()
+        if GAMEOVER_FONT == True:
+            draw_text(screen,'GAME OVER',100,150,300)  
+            if now_gameover - GAMEOVER_TIME >= 1000:
+                GAMEOVER_FONT = False
+                GAMEOVER_TIME = now_gameover
+        else:
+            draw_text(screen,'GAME OVER',50,200,300)
+            if now_gameover - GAMEOVER_TIME >= 1000:
+                GAMEOVER_FONT = True
+                GAMEOVER_TIME = now_gameover
 
     #นำตัวละครทั้งหมดมาวาดใส่เกม
     all_sprites.draw(screen)
