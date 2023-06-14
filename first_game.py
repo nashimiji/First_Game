@@ -93,9 +93,9 @@ class Player(pygame.sprite.Sprite):
        # เช็คว่ามีการกดปุ่มหรือไม่? ปุ่มอะไร?
       
        keystate = pygame.key.get_pressed()
-       if keystate[pygame.K_LEFT]:
+       if keystate[pygame.K_LEFT] and self.rect.x > 0:
            self.speed_x = -5
-       if keystate[pygame.K_RIGHT]:
+       if keystate[pygame.K_RIGHT] and self.rect.x < WIDTH - self.rect.width:
            self.speed_x = 5
 
        self.rect.x += self.speed_x
