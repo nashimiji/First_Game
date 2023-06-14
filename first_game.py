@@ -275,6 +275,7 @@ while running:
     # update score
     draw_text(screen,'SCORE:{}'.format(SCORE),30,WIDTH-300,10)
     draw_text(screen,'Lives:{}'.format(LIVES),20,100,10) 
+    # เมื่อเกม over อยากใส่อะไรเข้าไปใส่ได้เลย
     if GAMEOVER == True:
         now_gameover = pygame.time.get_ticks()
         if GAMEOVER_FONT == True:
@@ -287,6 +288,14 @@ while running:
             if now_gameover - GAMEOVER_TIME >= 1000:
                 GAMEOVER_FONT = True
                 GAMEOVER_TIME = now_gameover
+
+        # ทำให้เครื่องบินศัตรูหายไป
+        for enemy in group_enemy:
+            enemy.kill()
+        for medic in group_madicpack:
+            medic.kill()
+               
+        
 
     #นำตัวละครทั้งหมดมาวาดใส่เกม
     all_sprites.draw(screen)
