@@ -15,6 +15,7 @@ pygame.mixer_music.play(-1) # -1 is loop
 explosion = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
 laser = pygame.mixer.Sound(os.path.join(PATH,'laser.wav'))
 powerup = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
+gameover = pygame.mixer.Sound(os.path.join(PATH,'gameover.wav'))
 
 # FPS Frame rate
 FPS = 60
@@ -315,6 +316,8 @@ while running:
     draw_text(screen,'Lives:{}'.format(LIVES),20,100,10) 
     # เมื่อเกม over อยากใส่อะไรเข้าไปใส่ได้เลย
     if GAMEOVER == True:
+
+        pygame.mixer.Sound.play(gameover)
         now_gameover = pygame.time.get_ticks()
         if GAMEOVER_FONT == True:
             draw_text(screen,'GAME OVER',100,150,300)  
