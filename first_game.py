@@ -144,8 +144,13 @@ class Medicpack(pygame.sprite.Sprite):
     
     def __init__(self):
       pygame.sprite.Sprite.__init__(self)
-
       img = os.path.join(PATH,'3.png')
+      # main clock
+      self.last = pygame.time.get_ticks() 
+      self.wait = 20000 # milliseconds / 20 seconds
+      self.run = True
+      #print('CLCOK MADIC:', self.last)
+
       self.image = pygame.image.load(img).convert_alpha()
       self.rect = self.image.get_rect()
       rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
@@ -153,12 +158,21 @@ class Medicpack(pygame.sprite.Sprite):
       self.speed_y = random.randint(3,5)
 
     def update(self):
-       self.rect.y += self .speed_y
+       now = pygame.time.get_ticks()
+       if self.run == True:
+           self.rect.y += self.speed_y
+
+   
        if self.rect.bottom > HEIGHT:
-           self.rect.y = 0
+           # เมื่อหระเป๋าพยาบาล หล่นลงไปเจอขอบจอ จะสั่งให้มันหยุดวิ่ง
+           self.run = False
+           #print('CLOCK MEDIC 2:',pygame.time.get_ticks())
+           self.rect.y = -100
            rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
            self.rect.x = rand_x
            self.speed_y = random.randint(3,10)
+
+
 
 # การะสุนปืนชนิดพิเศษ
 '''
