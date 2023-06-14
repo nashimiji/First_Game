@@ -16,6 +16,7 @@ explosion = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
 laser = pygame.mixer.Sound(os.path.join(PATH,'laser.wav'))
 powerup = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
 gameover = pygame.mixer.Sound(os.path.join(PATH,'gameover.wav'))
+sound_state = True
 
 # FPS Frame rate
 FPS = 60
@@ -106,21 +107,24 @@ class Player(pygame.sprite.Sprite):
        # เช็คว่ามีการกดปุ่มหรือไม่? ปุ่มอะไร?
       
        keystate = pygame.key.get_pressed()
-       if keystate[pygame.K_LEFT] and self.rect.x > 0:
-           self.speed_x = -5
-       if keystate[pygame.K_RIGHT] and self.rect.x < WIDTH - self.rect.width:
-           self.speed_x = 5
+       if GAMEOVER != True:
+           if keystate[pygame.K_LEFT] and self.rect.x > 0:
+                self.speed_x = -5
+           if keystate[pygame.K_RIGHT] and self.rect.x < WIDTH - self.rect.width:
+                self.speed_x = 5
 
        self.rect.x += self.speed_x
            
        if self.rect.bottom > HEIGHT:
            self.rect.y = 0
+       
 
     def shoot(self):
-        pygame.mixer.Sound.play(laser)
-        bullet = Bullet(self.rect.centerx, self.rect.top)
-        all_sprites.add(bullet)
-        group_bullet.add(bullet)
+        if GAMEOVER != True:
+            pygame.mixer.Sound.play(laser)
+            bullet = Bullet(self.rect.centerx, self.rect.top)
+            all_sprites.add(bullet)
+            group_bullet.add(bullet)
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -316,8 +320,10 @@ while running:
     draw_text(screen,'Lives:{}'.format(LIVES),20,100,10) 
     # เมื่อเกม over อยากใส่อะไรเข้าไปใส่ได้เลย
     if GAMEOVER == True:
-
-        pygame.mixer.Sound.play(gameover)
+        if sound_state == True:
+             pygame.mixer.Sound.play(gameover)
+             sound_state = False
+             
         now_gameover = pygame.time.get_ticks()
         if GAMEOVER_FONT == True:
             draw_text(screen,'GAME OVER',100,150,300)  
