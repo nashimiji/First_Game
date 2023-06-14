@@ -5,9 +5,16 @@ PATH = os.getcwd() # get current working directory
 pygame.init()
 pygame.mixer.init()
 
+################# SOUND EFFECT #####################
+
 # background music
 pygame.mixer_music.load(os.path.join(PATH,'background-music.wav'))
 pygame.mixer_music.play(-1) # -1 is loop
+
+# collide sound
+explosion = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
+laser = pygame.mixer.Sound(os.path.join(PATH,'laser.wav'))
+powerup = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
 
 # FPS Frame rate
 FPS = 60
@@ -109,6 +116,7 @@ class Player(pygame.sprite.Sprite):
            self.rect.y = 0
 
     def shoot(self):
+        pygame.mixer.Sound.play(laser)
         bullet = Bullet(self.rect.centerx, self.rect.top)
         all_sprites.add(bullet)
         group_bullet.add(bullet)
@@ -144,7 +152,7 @@ class Bullet(pygame.sprite.Sprite):
 
 # กระเป๋าพยาบาล
 '''
-- กระเป๋าจะตกทุก30 นาที
+- กระเป๋าจะตกทุก 30 นาที
 - เมื่อเราชนกับกระเป๋า จะได้ชีวิตเพิ่มอีก 1 
 - กระเป๋าจะหายไปเมื่อชน
 - มีเสียงติ๊งเมื่อได้รับกระเป๋า
@@ -256,6 +264,8 @@ while running:
     #    print(LIVES)
 
     if collide:
+        
+        pygame.mixer.Sound.play(explosion)
 
         enemy = Enemy()
         all_sprites.add(enemy)
@@ -274,6 +284,9 @@ while running:
 
     collidemedic = pygame.sprite.spritecollide(player, group_medicpack,True)
     if collidemedic:
+
+        pygame.mixer.Sound.play(powerup)
+
         LIVES += 1
         medicpack = Medicpack()
         all_sprites.add(medicpack)
