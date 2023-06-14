@@ -206,7 +206,7 @@ def draw_text(screen,text,size,x,y):
 all_sprites = pygame.sprite.Group() # กล่องสำหรับเก็บตัวละคร
 group_enemy = pygame.sprite.Group() # กล่องสำหรับเก็บศัตรู
 group_bullet = pygame.sprite.Group() # กล่องสำหรับใส่กระสุน
-group_madicpack = pygame.sprite.Group()
+group_medicpack = pygame.sprite.Group()
 
 # player
 player = Player() #สร้างตัวละคร
@@ -221,7 +221,7 @@ for i in range(5):
 # madicpack
 medicpack = Medicpack()
 all_sprites.add(medicpack)
-group_madicpack.add(medicpack)
+group_medicpack.add(medicpack)
 
 # สถานะของเกม
 running = True #True = YES , False = No
@@ -266,6 +266,11 @@ while running:
 
         #running = False
 
+    collidemedic = pygame.sprite.spritecollide(player, group_medicpack,True)
+    if collidemedic:
+        LIVES += 1
+        
+
 
     # bullet collission
     hits = pygame.sprite.groupcollide(group_bullet,group_enemy,True,True)
@@ -303,7 +308,7 @@ while running:
         # ทำให้เครื่องบินศัตรูหายไป
         for enemy in group_enemy:
             enemy.kill()
-        for medic in group_madicpack:
+        for medic in group_medicpack:
             medic.kill()
                
         
