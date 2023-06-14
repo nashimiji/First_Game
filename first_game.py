@@ -161,13 +161,16 @@ class Medicpack(pygame.sprite.Sprite):
        now = pygame.time.get_ticks()
        if self.run == True:
            self.rect.y += self.speed_y
-
    
        if self.rect.bottom > HEIGHT:
            # เมื่อหระเป๋าพยาบาล หล่นลงไปเจอขอบจอ จะสั่งให้มันหยุดวิ่ง
            self.run = False
            #print('CLOCK MEDIC 2:',pygame.time.get_ticks())
            self.rect.y = -100
+           
+       if (now - self.last) >= self.wait:
+           self.run = True
+           self.last = now
            rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
            self.rect.x = rand_x
            self.speed_y = random.randint(3,10)
