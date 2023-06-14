@@ -154,17 +154,18 @@ class Medicpack(pygame.sprite.Sprite):
       # main clock
       self.last = pygame.time.get_ticks() 
       self.wait = 20000 # milliseconds / 20 seconds
-      self.run = True
+      self.run = False
       #print('CLCOK MADIC:', self.last)
 
       self.image = pygame.image.load(img).convert_alpha()
       self.rect = self.image.get_rect()
       rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
-      self.rect.center = (rand_x, 0)
+      self.rect.center = (rand_x, -100)
       self.speed_y = random.randint(3,5)
 
     def update(self):
        now = pygame.time.get_ticks()
+
        if self.run == True:
            self.rect.y += self.speed_y
    
@@ -179,7 +180,7 @@ class Medicpack(pygame.sprite.Sprite):
            self.last = now
            rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
            self.rect.x = rand_x
-           self.speed_y = random.randint(3,10)
+           self.speed_y = random.randint(3,5)
 
 
 
@@ -269,6 +270,9 @@ while running:
     collidemedic = pygame.sprite.spritecollide(player, group_medicpack,True)
     if collidemedic:
         LIVES += 1
+        medicpack = Medicpack()
+        all_sprites.add(medicpack)
+        group_medicpack.add(medicpack)
         
 
 
