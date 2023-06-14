@@ -248,7 +248,7 @@ while running:
     #    print(LIVES)
 
     if collide:
-        LIVES += 1 # LIVES = LIVES - 1
+        LIVES -= 1 # LIVES = LIVES - 1
         if LIVES == 0:
             GAMEOVER = True
 
