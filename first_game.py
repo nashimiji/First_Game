@@ -112,8 +112,8 @@ class Bullet(pygame.sprite.Sprite):
       pygame.sprite.Sprite.__init__(self)
 
       self.image = pygame.Surface((10,10))
-      self.image.fill(VIOLET)
-
+      self.image.fill(VIOLET)   
+    
       # สร้างสีเหลี่ยม
       self.rect = self.image.get_rect()
       self.rect.centerx = x
