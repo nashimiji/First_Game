@@ -3,6 +3,11 @@ import random
 import os
 PATH = os.getcwd() # get current working directory
 pygame.init()
+pygame.mixer.init()
+
+# background music
+pygame.mixer_music.load(os.path.join(PATH,'background-music.wav'))
+pygame.mixer_music.play(-1) # -1 is loop
 
 # FPS Frame rate
 FPS = 60
