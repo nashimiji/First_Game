@@ -284,7 +284,7 @@ while running:
                 GAMEOVER_FONT = False
                 GAMEOVER_TIME = now_gameover
         else:
-            draw_text(screen,'GAME OVER',50,200,300)
+            draw_text(screen,'GAME OVER',50,270,330)
             if now_gameover - GAMEOVER_TIME >= 1000:
                 GAMEOVER_FONT = True
                 GAMEOVER_TIME = now_gameover
