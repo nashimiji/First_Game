@@ -16,6 +16,7 @@ VIOLET = (92,0,168)
 SCORE = 0
 # ชีวิต
 LIVES = 3 
+GAMEOVER = False
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('My First Game by nashimiji')
@@ -244,8 +245,12 @@ while running:
     #    print(LIVES)
 
     if collide:
-        # หากมีการชนกัน จะปิดโปรแกรมทันที
-        running = False
+        LIVES += 1 # LIVES = LIVES - 1
+        if LIVES == 0:
+            GAMEOVER = True
+
+
+        #running = False
 
 
     # bullet collission
@@ -267,6 +272,7 @@ while running:
     # update score
     draw_text(screen,'SCORE:{}'.format(SCORE),30,WIDTH-300,10)
     draw_text(screen,'Lives:{}'.format(LIVES),20,100,10)  
+    draw_text(screen,'GAME OVER',100,200,300)  
 
     #นำตัวละครทั้งหมดมาวาดใส่เกม
     all_sprites.draw(screen)
