@@ -1,5 +1,7 @@
 import pygame
 import random
+import os
+PATH = os.getcwd() # get current working directory
 pygame.init()
 
 # FPS Frame rate
@@ -19,9 +21,9 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('My First Game by nashimiji')
 
 # background
-bg = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\background.png'
+bg = os.path.join(PATH,'background.png')
 background = pygame.image.load(bg).convert_alpha()
-background_rect = background.get_rect()
+backgruond_rect = background.get_rect()
 
 #สร้างนาฬิกาของเกม
 clock = pygame.time.Clock()
@@ -32,7 +34,7 @@ class Enemy(pygame.sprite.Sprite):
       # ฟังชั่นหลักที่มันจะรันทุกครั้งที่มีการเรียกใช้
       pygame.sprite.Sprite.__init__(self)
 
-      img = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\T1.png'
+      img = os.path.join(PATH,'T1.png')
       self.image = pygame.image.load(img).convert_alpha()
 
       # self.image = pygame.Surface((50,50))
@@ -66,7 +68,7 @@ class Player(pygame.sprite.Sprite):
       #ฟังชั่นหลักที่มันจะรันทุกครั้งที่มีการเรียกใช้
       pygame.sprite.Sprite.__init__(self)
 
-      img = 'C:\\Users\\170361\\Desktop\\KR01\\First_Game\\photo\\2.png'
+      img = os.path.join(PATH,'2.png')
       self.image = pygame.image.load(img).convert_alpha()
 
       #self.image = pygame.Surface((50,50))
@@ -112,7 +114,7 @@ class Bullet(pygame.sprite.Sprite):
       pygame.sprite.Sprite.__init__(self)
 
       self.image = pygame.Surface((10,10))
-      self.image.fill(VIOLET)   
+      self.image.fill(YELLOW)   
     
       # สร้างสีเหลี่ยม
       self.rect = self.image.get_rect()
@@ -128,6 +130,44 @@ class Bullet(pygame.sprite.Sprite):
         # ลบกระสุนเมื่อแกน y < 0
         if self.rect.y < 0:
             self.kill()
+
+# กระเป๋าพยาบาล
+'''
+- กระเป๋าจะตกทุก30 นาที
+- เมื่อเราชนกับกระเป๋า จะได้ชีวิตเพิ่มอีก 1 
+- กระเป๋าจะหายไปเมื่อชน
+- มีเสียงติ๊งเมื่อได้รับกระเป๋า
+- เมื่อกระเป๋าลงไปด้านล่างสุดให้รออีก 30 วินาทีกว่ามันจะออกมา
+
+'''
+class Medicpack(pygame.sprite.Sprite):
+    
+    def __init__(self):
+      pygame.sprite.Sprite.__init__(self)
+
+      img = os.path.join(PATH,'3.png')
+      self.image = pygame.image.load(img).convert_alpha()
+      self.rect = self.image.get_rect()
+      rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
+      self.rect.center = (rand_x, 0)
+      self.speed_y = random.randint(3,5)
+
+    def update(self):
+       self.rect.y += self .speed_y
+       if self.rect.bottom > HEIGHT:
+           self.rect.y = 0
+           rand_x = random.randint(self.rect.width,WIDTH - self.rect.width)
+           self.rect.x = rand_x
+           self.speed_y = random.randint(3,10)
+
+# การะสุนปืนชนิดพิเศษ
+'''
+- เมื่อได้รับกระสุนชนิดพิเศษแล้ว
+- จะเป็นกระสุนได้ออกมาเป็นแนวนอน
+- ยิงเป็นเส้นตรงยาวเหมือนเลเซอร์
+- ยิงนัดเดียวได้เครื่องบินหลายลำ
+
+'''
           
 font_name = pygame.font.match_font('arial')
 def draw_text(screen,text,size,x,y):
@@ -199,7 +239,7 @@ while running:
     # ใส่สีแบกกราวของเกม
     screen.fill(YELLOW)  
 
-    screen.blit(background,background_rect)
+    screen.blit(background , backgruond_rect)
     
     # update score
     draw_text(screen,'SCORE:{}'.format(SCORE),30,WIDTH-300,10)
