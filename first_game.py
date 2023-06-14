@@ -12,7 +12,7 @@ pygame.mixer_music.load(os.path.join(PATH,'background-music.wav'))
 pygame.mixer_music.play(-1) # -1 is loop
 
 # collide sound
-explosion = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
+explosion = pygame.mixer.Sound(os.path.join(PATH,'explosion.wav'))
 laser = pygame.mixer.Sound(os.path.join(PATH,'laser.wav'))
 powerup = pygame.mixer.Sound(os.path.join(PATH,'powerup.wav'))
 gameover = pygame.mixer.Sound(os.path.join(PATH,'gameover.wav'))
@@ -323,7 +323,7 @@ while running:
         if sound_state == True:
              pygame.mixer.Sound.play(gameover)
              sound_state = False
-             
+
         now_gameover = pygame.time.get_ticks()
         if GAMEOVER_FONT == True:
             draw_text(screen,'GAME OVER',100,150,300)  
