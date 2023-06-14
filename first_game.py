@@ -11,11 +11,13 @@ WIDTH = 800
 HEIGHT = 700
 YELLOW = (225,233,187)
 VIOLET = (92,0,168)
+BLUE = (175,248,255)
 
 # คะแนนเมื่อยิงโดน
 SCORE = 0
 # ชีวิต
 LIVES = 3 
+LIVES_TIME = pygame.time.get_ticks()
 GAMEOVER = False
 GAMEOVER_FONT = True
 GAMEOVER_TIME = pygame.time.get_ticks()
@@ -248,7 +250,11 @@ while running:
     #    print(LIVES)
 
     if collide:
-        LIVES -= 1 # LIVES = LIVES - 1
+        now_lives = pygame.time.get_ticks()
+        if now_lives - LIVES_TIME >= 3000:
+            LIVES -= 1
+            LIVES_TIME = now_lives
+
         if LIVES == 0:
             GAMEOVER = True
 
