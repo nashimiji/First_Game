@@ -183,6 +183,7 @@ def draw_text(screen,text,size,x,y):
 all_sprites = pygame.sprite.Group() # กล่องสำหรับเก็บตัวละคร
 group_enemy = pygame.sprite.Group() # กล่องสำหรับเก็บศัตรู
 group_bullet = pygame.sprite.Group() # กล่องสำหรับใส่กระสุน
+group_madicpack = pygame.sprite.Group()
 
 # player
 player = Player() #สร้างตัวละคร
@@ -193,6 +194,11 @@ for i in range(5):
     enemy = Enemy()
     all_sprites.add(enemy)
     group_enemy.add(enemy)
+
+# madicpack
+medicpack = Medicpack()
+all_sprites.add(medicpack)
+group_madicpack.add(medicpack)
 
 # สถานะของเกม
 running = True #True = YES , False = No
@@ -239,7 +245,7 @@ while running:
     # ใส่สีแบกกราวของเกม
     screen.fill(YELLOW)  
 
-    screen.blit(background , backgruond_rect)
+    screen.blit(background , backgruond_rect) 
     
     # update score
     draw_text(screen,'SCORE:{}'.format(SCORE),30,WIDTH-300,10)
